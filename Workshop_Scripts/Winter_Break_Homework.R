@@ -13,7 +13,7 @@ rm(list = ls())
 
 # Set your working directory to the folder containing 471 .csv files. For me,
 # this looks like:
-setwd("~/Desktop/Multi_Datasets")
+setwd("~/soda-dvm/Workshop_Data/Multi_Datasets")
 
 # You will want to make use of the following package, which you can download if
 # you have not already:
@@ -54,6 +54,14 @@ library(rio)
 # 1:20.
 
 
+raw_data <- NULL
+filenames = list.files(getwd())
+for(i in 1:length(filenames)) {
+  d <- read.csv(filenames[i], stringsAsFactors = FALSE, header = TRUE)
+  raw_data <- rbind(raw_data, d)
+}
+
+# nrow(raw_data) is 470800
 
 ### Exercise 2 ###
 
@@ -81,6 +89,21 @@ library(rio)
 # a bite to eat or go for a walk while your code runs.
 
 
+bill_ids <- paste(raw_data$session, raw_data$chamber, raw_data$number, sep = "-")
+raw_data$bill_id = bill_ids
+
+unique_bills <- unique(bill_ids)
+bill_sections <- rep(0, length(unique_bills))
+new_data <- NULL
+for(i in 1:length(unique_bills)) {
+  bill_indices <- which(raw_data$bill_id == unique_bills[i])
+  bill_sections[i] <- length(bill_indices)
+  new_data <- rbind(new_data, raw_data[bill_indices[1],])
+}
+
+# remove section column
+new_data <- subset(new_data, select=-c(section))
+Sections <- cbind(new_data, bill_sections)
 
 
 ### Exercise 3 ###
@@ -101,7 +124,38 @@ library(rio)
 # 1. Loop over unique legislators, create a one-row dataframe for each one,
 # then 'rbind()' them together.
 
+ex3 <- NULL
+unique_legislators <- unique(raw_data$NameFull)
+for(i in 1:length(unique_legislators)) {
+  indices <- which(Sections$NameFull == unique_legislators[i])
+  
+  Name <- unique_legislators[i]
+  Total_Bills <- length(indices)
 
+  Total_Sections <- 0
+  Earliest_Bill <- Sections[indices[1],]$IntrDate
+  for (j in 1:length(indices)) {
+    row <- Sections[indices[j],]
+    Total_Sections <- Total_Sections + row$bill_sections
+    
+    date <- row$IntrDate
+    if (date < Earliest_Bill) {
+      Earliest_Bill <- date
+    }
+  }
+
+  Average_Sections <- Total_Sections / Total_Bills
+
+  topics <- Sections[indices,]$major_topic_label
+  topic_df <- as.data.frame(table(unlist(topics)), stringsAsFactors = FALSE)
+  max_topic_count <- max(topic_df$Freq)
+  max_rows <- which(topic_df$Freq == max_topic_count)
+  Most_Common_Topic <- min(topic_df[max_rows,]$Var1)
+
+  new_row = data.frame(Name, Total_Bills, Total_Sections, Average_Sections, Earliest_Bill, Most_Common_Topic, 
+                       stringsAsFactors = FALSE)
+  ex3 <- rbind(ex3, new_row)
+}
 
 
 

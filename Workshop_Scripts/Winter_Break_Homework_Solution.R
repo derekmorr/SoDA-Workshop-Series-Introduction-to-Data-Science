@@ -6,7 +6,7 @@ rm(list = ls())
 
 # Set your working directory to the folder containing 471 .csv files. For me,
 # this looks like:
-setwd("~/Desktop/Multi_Datasets")
+setwd("~/soda-dvm/Workshop_Data/Multi_Datasets")
 
 # You will want to make use of the following package, which you can download if
 # you have not already:
@@ -21,37 +21,39 @@ sections <- NULL
 
 # Loop over 471 datasets. Alternatively we could only loop over 1:20, to make
 # everything go faster:
-for (i in 1:20) {
-    # print out the current dataset to keep track of our progress:
-    print(i)
+# for (i in 1:20) {
+#     # print out the current dataset to keep track of our progress:
+#     print(i)
 
-    # import the current dataset and use 'paste()' to generate the filenames
-    cur <- import(paste("dataset_",i,".csv", sep = ""))
+#     # import the current dataset and use 'paste()' to generate the filenames
+#     cur <- import(paste("dataset_",i,".csv", sep = ""))
 
-    # 'rbind()' the current data onto the full data.frame
-    sections <- rbind(sections,cur)
-}
+#     # 'rbind()' the current data onto the full data.frame
+#     sections <- rbind(sections,cur)
+# }
+
+sections <- readRDS("raw_data.rds")
 
 # But what if we did not know the filenames or they did not follow a common
 # pattern?
 
 # We could use 'list.files()' to get the names of all files in the current
 # working directory, then just use those:
-files <- list.files()
+# files <- list.files()
 
-# Proceed as we did above, but not using files[i] as the name for each file:
-sections <- NULL
-for (i in 1:length(files)) {
-    print(i)
-    cur <- import(files[i])
-    sections <- rbind(sections,cur)
-}
+# # Proceed as we did above, but not using files[i] as the name for each file:
+# sections <- NULL
+# for (i in 1:length(files)) {
+#     print(i)
+#     cur <- import(files[i])
+#     sections <- rbind(sections,cur)
+# }
 
-# Check our answer if using the full 471 datasets:
-470800 == nrow(sections) # the correct number of rows.
+# # Check our answer if using the full 471 datasets:
+# 470800 == nrow(sections) # the correct number of rows.
 
-# Check our answer if using the first 20 datasets:
-20000 == nrow(sections) # the correct number of rows.
+# # Check our answer if using the first 20 datasets:
+# 20000 == nrow(sections) # the correct number of rows.
 
 ### Exercise 2 ###
 
@@ -59,13 +61,13 @@ for (i in 1:length(files)) {
 Bill_ID <- rep("",nrow(sections))
 
 # Loop over rows and fill in Bill_ID:
-for (i in 1:nrow(sections)) {
-    # generate a bill ID for each section
-    Bill_ID[i] <- paste(sections$session[i],
-                        sections$chamber[i],
-                        sections$number[i],
-                        sep = "-")
-}
+# for (i in 1:nrow(sections)) {
+#     # generate a bill ID for each section
+#     Bill_ID[i] <- paste(sections$session[i],
+#                         sections$chamber[i],
+#                         sections$number[i],
+#                         sep = "-")
+# }
 
 # Alternatively, we could just do the following, which would be much faster:
 Bill_ID <- paste(sections$session,

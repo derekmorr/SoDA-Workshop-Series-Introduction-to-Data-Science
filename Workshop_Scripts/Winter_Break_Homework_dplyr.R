@@ -60,31 +60,13 @@ raw_data <- readRDS("raw_data.rds")
 # "Sections" variable in your new data.frame equal the number of rows in the old
 # data.frame (with one entry per section)?
 
-# add bill_id
-raw_data <- raw_data %>% 
-  mutate(bill_id = paste(session, chamber, number, sep="-"))
-
-# add section counts
-summary1 <- raw_data %>% 
-  group_by(bill_id) %>%
-  mutate(Sections = n())
-
-# remove duplicate records and drop the section column
-summary1 <- raw_data %>% 
-  group_by(bill_id) %>% 
-  distinct(bill_id, .keep_all = TRUE) %>% 
-  select(-section) %>%
-  ungroup()
-
-summary2 <- raw_data %>%
+summary1 <- raw_data %>%
   mutate(bill_id = paste(session, chamber, number, sep="-")) %>%
   group_by(bill_id) %>%
   mutate(Sections = n()) %>%
-  select(-section) %>%
   distinct(bill_id, .keep_all = TRUE) %>%
+  select(-section) %>%
   ungroup()
-
-
 
 
 ### Exercise 3 ###

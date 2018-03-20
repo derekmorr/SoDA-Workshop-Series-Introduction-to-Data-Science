@@ -26,8 +26,8 @@ authURL <- "https://api.twitter.com/oauth/authorize"
 
 # You will need to fill in these two as suggested in the directions given at the
 # webpage above:
-consumerKey <- "XXX"
-consumerSecret <- "XXX"
+consumerKey <- "2CgbMerSPhANFGivxy6Xfqqfd"
+consumerSecret <- "mjM7YvnmbeVVyWfxQXOOVhsLWzRAJpWEhIVzy3dP1si59BsZoS"
 my_oauth <- OAuthFactory$new(consumerKey = consumerKey,
                              consumerSecret = consumerSecret,
                              requestURL = requestURL,
@@ -40,7 +40,7 @@ my_oauth$handshake(cainfo = system.file("CurlSSL", "cacert.pem",
                                         package = "RCurl"))
 
 # Now save your credentials for future use!
-setwd("~/Dropbox/Credentials/")
+setwd("/home/derek/soda-dvm/")
 save(my_oauth, file = "my_oauth.RData")
 
 
@@ -55,12 +55,12 @@ save(my_oauth, file = "my_oauth.RData")
 library(streamR)
 
 # Load in your access credential we created above
-setwd("~/Dropbox/Credentials/")
+setwd("/home/derek/soda-dvm")
 load("my_oauth.Rdata")
 
 # Now set your working directory to the location where you would like to save
 # the tweets you are about to collect:
-setwd("~/Desktop")
+#setwd("/home/derek/soda-dvm")
 
 # Here we are going to use the filter function which uses dome sort of criteria
 # for determining which tweets should be saved.

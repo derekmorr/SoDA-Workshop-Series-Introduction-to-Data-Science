@@ -8,7 +8,7 @@ library(stringr)
 library(httr)
 
 # Set your working directory. For me, this looks like:
-setwd("~/Desktop")
+setwd("/home/derek/soda-dvm/Workshop_Data")
 
 # Load in the bill urls -- you may need to set your working directory or alter
 # the path below

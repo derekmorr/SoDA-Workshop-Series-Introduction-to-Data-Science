@@ -5,7 +5,7 @@
 
 # Always clean out your environment and set your working directory:
 rm(list = ls())
-setwd("~/Desktop")
+setwd("/tmp")
 
 # Lets look at how much slower things get when we use growing data
 # structures than when we use pre-allocation:

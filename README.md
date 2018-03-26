@@ -142,13 +142,24 @@ link and your client or by clicking the "Clone in Desktop" button on the right h
     * You can download the R script for this workshop [here](https://github.com/matthewjdenny/SoDA-Workshop-Series-Introduction-to-Data-Science/blob/master/Workshop_Scripts/Workshop_18-Performant_Programming.R).
     * You can download the data for this workshop [here](https://github.com/matthewjdenny/SoDA-Workshop-Series-Introduction-to-Data-Science/blob/master/Workshop_Data/Workshop_18_Example_Data.RData).
 
-22. **3/26/18: Parallelization**:
+22. **3/26/18: Parallelization and Sparse Data**:
+    * In this workshop we will focus on efficient data structures for representing sparse data (datasets containing lots of zeros), and processing data in parallel. The majority of the workshop will be spent going over the basics of implementing parallelization across several different types of data management problems. My goal will be to give participants the tools to speed up their computation across many related tasks, without having to get too deep into the weeds with programming.
+    * You can find the slides for this workshop [here](https://github.com/matthewjdenny/SoDA-Workshop-Series-Introduction-to-Data-Science/blob/master/Workshop_Materials/Workshop_19-Parallelization.pptx).
+    * You can download the R script for this workshop [here](https://github.com/matthewjdenny/SoDA-Workshop-Series-Introduction-to-Data-Science/blob/master/Workshop_Scripts/Workshop_19-Parallelization.R).
+    * You can download the data for this workshop [here](https://github.com/matthewjdenny/SoDA-Workshop-Series-Introduction-to-Data-Science/blob/master/Workshop_Data/Workshop_19-Data.zip).
+
 
 23. **4/2/18: Plotting**:
+    * In this workshop we will cover the basics of plotting in R. This will include how to put your data in a format where it can be plotted, and how to control a number of aesthetic features of R plots, including coloring, titles, legends, axis labels, etc. We will make use of both the base R graphics, and ggplot2, an add-onp ackage for generating beautiful plots in R.
+    
+24. **4/23/18: Advanced Plotting**:
+    * In this workshop, we will take what we have already learned about plotting in R, and apply it to a number of example datasets to make publication quality plots. Here, the goal will be mastering some of hte more advanced features of ggplot2, in order to effectively communicate complex data, while also having total control over the aesthetics of the plots. 
 
-24. **4/23/18: Managing Social Network Data**:
 
-25. **4/30/18: Creating Your Own R Package**:
+25. **4/30/18: Managing Social Network Data**:
+    * In our final workshop of the semester, we will dive into reading in, cleaning, and managing social network data. Social network analysis is one of R's strongest suits, and putting your data into a format that can be easily used with the statnet or igraph suites of analysis software is often the main bariaer for researchers to using this software. We will cover reading in data from a number of different formats, ingesting it using statnet, and make nice-look network plots
+
+
         
    
    

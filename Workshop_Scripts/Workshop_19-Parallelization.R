@@ -1,5 +1,5 @@
 ### Handling Big Data ###
-setwd("~/Desktop")
+setwd("~/tmp")
 
 # Start by setting the seed so our results are reproducible
 set.seed(12345)
@@ -31,7 +31,7 @@ as.matrix(sparse_big_data[1436,1])
 
 # install.packages("rio", dependencies = TRUE)
 library(rio)
-setwd("~/Desktop")
+setwd("~/tmp")
 
 # Try saving in both formats and look at the file sizes:
 export(big_data, file = "Data.csv")
@@ -243,18 +243,19 @@ preprocess_parallel <- function(filenames,
 }
 
 # Lets try it out!
-setwd("~/Desktop/Data")
+setwd("/home/derek/soda-dvm/Workshop_Data/Data")
 filenames <- list.files()
 
 # Time the standard way of doing it:
 system.time({
     serial_data <- preprocess_data(filenames,
-                                   columns_to_keep = 200)
+                                   columns_to_keep = 20000)
 })
 
 # Now try it out in parallel on 4 cores:
 system.time({
     parallel_data <- preprocess_parallel(filenames,
                                          cores = 4,
-                                         columns_to_keep = 200)
+                                         columns_to_keep = 2000)
 })
+

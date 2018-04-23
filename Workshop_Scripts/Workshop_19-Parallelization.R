@@ -224,13 +224,14 @@ preprocess_parallel <- function(filenames,
     cl <- parallel::makeCluster(getOption("cl.cores", cores))
 
     # Run our function on the cluster:
-    data_list <- parallel::clusterApplyLB(cl = cl,
-                                          x = filenames,
-                                          fun = wrapper_function,
-                                          has_header = has_header,
-                                          columns_to_keep = columns_to_keep,
-                                          fun1 = fun1,
-                                          fun2 = fun2)
+    data_list <- parallel::clusterApplyLB(
+        cl = cl,
+        x = filenames,
+        fun = wrapper_function,
+        has_header = has_header,
+        columns_to_keep = columns_to_keep,
+        fun1 = fun1,
+        fun2 = fun2)
 
     # Stop the cluster when we are done:
     parallel::stopCluster(cl)
@@ -253,9 +254,12 @@ system.time({
 })
 
 # Now try it out in parallel on 4 cores:
+<<<<<<< HEAD
 system.time({
     parallel_data <- preprocess_parallel(filenames,
                                          cores = 4,
                                          columns_to_keep = 2000)
 })
 
+=======
+>>>>>>> a002c8de600d201ad5f4cc820f5d521b0aaedb1a

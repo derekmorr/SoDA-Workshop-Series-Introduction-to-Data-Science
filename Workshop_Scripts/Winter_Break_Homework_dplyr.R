@@ -102,8 +102,8 @@ legislator <- raw_data %>%
   group_by(Name) %>%
   summarize(
     Total_Bills = n(),
-    Total_Sections = sum(Sections),
-    Average_Sections = mean(Sections),
+    Total_Sections = sum(section),
+    Average_Sections = mean(section),
     Earliest_Bill = min(IntrDate))
 
 # the final tibble
